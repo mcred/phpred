@@ -4,9 +4,9 @@ namespace PHPRed;
 use \Prophecy;
 
 /**
-* @covers \PHPRed\PHPRed
+* @covers \PHPRed\Model
 */
-class PHPRedTest extends \PHPUnit\Framework\TestCase
+class ModelTest extends \PHPUnit\Framework\TestCase
 {
     private $prophet;
     private $mysqli;
@@ -19,7 +19,7 @@ class PHPRedTest extends \PHPUnit\Framework\TestCase
 
     public function testCanInstantiate()
     {
-        $phpred = new PHPRed($this->mysqli->reveal());
-        $this->assertInstanceOf(PHPRed::class, $phpred);
+        $model = new Model($this->mysqli->reveal());
+        $this->assertInstanceOf(Model::class, $model);
     }
 }

@@ -1,12 +1,10 @@
 <?php
 namespace PHPRed;
 
-class PHPRed
+class Model extends PHPRed
 {
-    private $mysqli;
-
     public function __construct(\mysqli $mysqli)
     {
-        $this->mysqli = $mysqli;
+        parent::__construct($mysqli);
     }
 }

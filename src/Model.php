@@ -14,7 +14,6 @@ abstract class Model extends PHPRed
     public function getAll()
     {
         $query = "SELECT * FROM $this->table;";
-        $results = $this->mysqli->query($query);
-        return $this->toArray($results);
+        return $this->query($query);
     }
 }

@@ -10,8 +10,12 @@ abstract class PHPRed
         $this->mysqli = $mysqli;
     }
 
-    protected function toArray(\mysqli_result $results) : array
+    protected function query(string $query) : array
     {
+        $results = $this->mysqli->query($query);
+        if ($results->num_rows == 0) {
+            throw new \Exception("No records found.");
+        }
         return $results->fetch_array(MYSQLI_ASSOC);
     }
 }

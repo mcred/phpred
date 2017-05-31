@@ -11,7 +11,8 @@
         }
     ],
     "require": {
-        "vlucas/phpdotenv": "^2.4"
+        "vlucas/phpdotenv": "^2.4",
+        "theseer/autoload": "^1.23"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.1"

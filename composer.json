@@ -9,5 +9,8 @@
             "email": "derek@grindaga.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^6.1"
+    }
 }

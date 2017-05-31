@@ -13,6 +13,9 @@ abstract class PHPRed
     protected function query(string $query) : array
     {
         $results = $this->mysqli->query($query);
+        if ($this->mysqli->errno) {
+            throw new \Exception($this->mysqli->error);
+        }
         if ($results->num_rows == 0) {
             throw new \Exception("No records found.");
         }

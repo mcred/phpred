@@ -24,13 +24,17 @@ abstract class Model extends PHPRed
         return $this->query($query);
     }
 
-    public function getByArgs(array $args) : array
+    public function getByArgs(array $args, string $method) : array
     {
         $search = '';
         foreach ($args as $key => $value) {
-            $search .= '`' . $key . '` = "' . $value . '" ';
+            $key = $this->mysqli->escape_string($key);
+            $value = $this->mysqli->escape_string($value);
+            $search .= '`' . $key . '` = "' . $value . '" ' . $method;
         }
+        $search = trim(substr($search, 0, -strlen($method)));
         $query = "SELECT * FROM $this->table WHERE $search;";
+        var_dump($query);
         return $this->query($query);
     }
 }

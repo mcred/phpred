@@ -2,6 +2,7 @@
     "name": "mcred/phpred",
     "description": "Relationships, Entities and Datasources for PHP",
     "type": "library",
+    "minimum-stability": "stable",
     "license": "MIT",
     "authors": [
         {
@@ -9,7 +10,9 @@
             "email": "derek@grindaga.com"
         }
     ],
-    "require": {},
+    "require": {
+        "vlucas/phpdotenv": "^2.4"
+    },
     "require-dev": {
         "phpunit/phpunit": "^6.1"
     }

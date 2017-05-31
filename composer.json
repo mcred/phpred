@@ -1,0 +1,13 @@
+{
+    "name": "mcred/phpred",
+    "description": "Relationships, Entities and Datasources for PHP",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Derek Smart",
+            "email": "derek@grindaga.com"
+        }
+    ],
+    "require": {}
+}

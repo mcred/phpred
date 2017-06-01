@@ -16,6 +16,7 @@ abstract class PHPRed
 
     protected function query(string $query) : array
     {
+        echo PHP_EOL . $query . PHP_EOL;
         $results = $this->mysqli->query($query);
         if ($this->mysqli->errno) {
             throw new \Exception($this->mysqli->error . $query);
@@ -31,26 +32,26 @@ abstract class PHPRed
 
     public function orderBy(array $args)
     {
-        $order = 'ORDER BY ';
+        $order = ' ORDER BY ';
         foreach ($args as $key => $value) {
             $key = $this->mysqli->escape_string($key);
             $value = $this->mysqli->escape_string($value);
-            $order .= '`' . $key . '` ' . strtoupper($value) . ' ';
+            $order .= $this->model . '.`' . $key . '` ' . strtoupper($value) . ', ';
         }
-        $this->order = trim($order);
+        $this->order = rtrim(substr($order, 0, -2));
         return $this;
     }
 
 
     public function where(array $args, string $method = 'AND')
     {
-        $search = 'WHERE ';
+        $search = ' WHERE ';
         foreach ($args as $key => $value) {
             $key = $this->mysqli->escape_string($key);
             $value = $this->mysqli->escape_string($value);
-            $search .= '`' . $key . '` = "' . $value . '" ' . $method;
+            $search .= $this->model . '.`' . $key . '` = "' . $value . '" ' . $method;
         }
-        $this->conditions .= trim(substr($search, 0, -strlen($method)));
+        $this->conditions .= rtrim(substr($search, 0, -strlen($method)));
         return $this;
     }
 }

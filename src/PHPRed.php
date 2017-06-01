@@ -45,6 +45,12 @@ abstract class PHPRed
         return $this;
     }
 
+    public function limit(int $limit)
+    {
+        $this->limit = ' LIMIT ' . $limit;
+        return $this;
+    }
+
     public function orderBy(array $args)
     {
         $order = ' ORDER BY ';

@@ -38,6 +38,7 @@ abstract class Model extends PHPRed
         $query .= $this->conditions;
         $query .= $this->group;
         $query .= $this->order;
+        $query .= $this->limit;
         return $this->query($query);
     }
 }

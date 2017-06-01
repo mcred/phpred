@@ -6,12 +6,16 @@ abstract class PHPRed
     protected $mysqli;
     protected $conditions;
     protected $order;
+    protected $group;
+    protected $limit;
 
     public function __construct(\mysqli $mysqli)
     {
         $this->mysqli = $mysqli;
         $this->conditions = '';
         $this->order = '';
+        $this->group = '';
+        $this->limit = '';
     }
 
     protected function query(string $query) : array
@@ -28,6 +32,17 @@ abstract class PHPRed
             $return[] = $row;
         }
         return $return;
+    }
+
+    public function groupBy(array $args)
+    {
+        $group = ' GROUP BY ';
+        foreach ($args as $value) {
+            $value = $this->mysqli->escape_string($value);
+            $group .= $this->model . '.`' . $value . '`, ';
+        }
+        $this->group = rtrim(substr($group, 0, -2));
+        return $this;
     }
 
     public function orderBy(array $args)

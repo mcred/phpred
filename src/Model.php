@@ -36,6 +36,7 @@ abstract class Model extends PHPRed
     {
         $query = "SELECT $this->model.* FROM $this->alias";
         $query .= $this->conditions;
+        $query .= $this->group;
         $query .= $this->order;
         return $this->query($query);
     }

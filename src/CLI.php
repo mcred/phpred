@@ -8,11 +8,15 @@ class CLI
     public function __construct(\mysqli $mysqli)
     {
         $this->mysqli = $mysqli;
-        $this->welcome();
     }
 
     private function welcome()
     {
         fwrite(STDERR, 'Welcome' . "\n\n");
+    }
+
+    public function run()
+    {
+        $this->welcome();
     }
 }

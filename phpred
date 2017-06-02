@@ -1,0 +1,44 @@
+#!/usr/bin/env php
+<?php
+/**
+ * This file is the the main CLI for PHPRed.
+ *
+ * @copyright   Derek Smart <derek@grindaga.com>
+ * @author      Derek Smart <derek@grindaga.com>
+ * @license     MIT
+ */
+
+$minimunVersion = '7.0.0';
+if (version_compare($minimunVersion, PHP_VERSION, '>')) {
+    echo 'PHPRed requires a minimum PHP version of 7.0' . PHP_EOL;
+    die(1);
+}
+
+$autoload = [
+    __DIR__ . '/../src/autoload.php',
+    __DIR__ . '/src/autoload.php',
+    __DIR__ . '/../vendor/autoload.php',
+    __DIR__ . '/vendor/autoload.php'
+];
+foreach ($autoload as $file) {
+    if (file_exists($file)) {
+        require $file;
+    }
+}
+
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
+$dotenv->required([
+    'db_name',
+    'db_host',
+    'db_username',
+    'db_password',
+    'db_port'
+])->notEmpty();
+
+$mysqli = new \mysqli($_ENV['db_host'], $_ENV['db_username'], $_ENV['db_password'], $_ENV['db_name'], $_ENV['db_port']);
+if ($mysqli->connect_errno) {
+    echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+}
+
+$test = new \Test($mysqli);

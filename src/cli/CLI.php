@@ -3,7 +3,6 @@ namespace PHPRed\CLI;
 
 abstract class CLI extends \PHPRed\PHPRed
 {
-    protected $mysqli;
     private $stdout;
     private $stderr;
     private $stdin;

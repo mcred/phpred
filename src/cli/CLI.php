@@ -1,19 +1,17 @@
 <?php
 namespace PHPRed\CLI;
 
-abstract class CLI extends \PHPRed\PHPRed
+abstract class CLI
 {
     private $stdout;
     private $stderr;
     private $stdin;
 
-    public function __construct(\mysqli $mysqli, $stdout = '', $stderr = '', $stdin = '')
+    public function __construct($stdout = STDOUT, $stderr = STDERR, $stdin = STDIN)
     {
-        parent::__construct($mysqli);
-
-        $this->stdout = $stdout ? $stdout : STDOUT;
-        $this->stderr = $stderr ? $stderr : STDERR;
-        $this->stdin = $stdin ? $stdin : STDIN;
+        $this->stdout = $stdout;
+        $this->stderr = $stderr;
+        $this->stdin = $stdin;
     }
 
     protected function shutDown()

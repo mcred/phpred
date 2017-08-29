@@ -6,7 +6,7 @@
     <property name="phpunit" value="${basedir}/vendor/bin/phpunit"/>
 
     <target name="build"
-            depends="composerInstall,clean,autoload"
+            depends="composerInstall,clean,autoload,mockAutoload"
             description="Prepares the exercise"/>
 
     <target name="autoload"
@@ -18,8 +18,19 @@
             <arg path="${basedir}/src/autoload.php" />
             <arg path="${basedir}/src" />
         </exec>
-
         <property name="autoload.done" value="true"/>
+    </target>
+
+    <target name="mockAutoload"
+            unless="mockAutoload.done"
+            description="Generate the tests mocks autoloader.">
+        <exec executable="${phpab}" taskname="phpab">
+            <arg value="-1" />
+            <arg value="--output" />
+            <arg path="${basedir}/tests/mocks/autoload.php" />
+            <arg path="${basedir}/tests/mocks" />
+        </exec>
+        <property name="mockAutoload.done" value="true"/>
     </target>
 
     <target name="composerInstall"

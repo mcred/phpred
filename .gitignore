@@ -5,3 +5,4 @@ vendor/
 build/coverage
 build/logs
 src/autoload.php
+tests/mocks/autoload.php

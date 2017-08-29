@@ -1,0 +1,13 @@
+language: php
+php:
+  - '7.1'
+cache:
+  directories:
+  - $HOME/.composer/cache/files
+install:
+  - sudo apt-get install ant
+  - ant
+script:
+  - phpunit
+after_success:
+  - CODECLIMATE_REPO_TOKEN=497d32580872536fe09567cf567cfdbe39e06175c881df5983049bc33b108188 ./vendor/bin/test-reporter

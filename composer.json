@@ -12,7 +12,8 @@
     ],
     "require": {
         "vlucas/phpdotenv": "^2.4",
-        "theseer/autoload": "^1.23"
+        "theseer/autoload": "^1.23",
+        "joshcam/mysqli-database-class": "^2.8"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.1"

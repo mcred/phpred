@@ -30,6 +30,9 @@
     <whitelist addUncoveredFilesFromWhitelist="true">
       <directory suffix=".php">src</directory>
       <exclude>
+        <directory suffix=".php">src/cli</directory>
+      </exclude>
+      <exclude>
         <file>src/autoload.php</file>
       </exclude>
     </whitelist>

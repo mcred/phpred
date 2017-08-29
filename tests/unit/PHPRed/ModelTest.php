@@ -16,6 +16,7 @@ class ModelTest extends \PHPUnit\Framework\TestCase
     private $services;
     private $pipesServices;
     private $pipesUsers;
+    private $users;
 
     public function setup()
     {
@@ -41,7 +42,7 @@ class ModelTest extends \PHPUnit\Framework\TestCase
             'pipe_id' => 1,
             'service_id' => 1
         ];
-        $this->pipesUsers = [
+        $this->pipesUsers = [[
             'id' => 1,
             'pipe_id' => 1,
             'user_id' => 1,
@@ -49,10 +50,15 @@ class ModelTest extends \PHPUnit\Framework\TestCase
             'run_count' => 3,
             'tracking_condition' => '',
             'enabled' => 1
-        ];
+        ]];
+        $this->users = [[
+            'id' => 1,
+            'email' => 'derek@grindaga.com'
+        ]];
         $this->prophet = new Prophecy\Prophet;
         $this->mysql = $this->prophet->prophesize("\MysqliDb");
         $this->pipe = new Pipe($this->mysql->reveal());
+        $this->pipeUser = new PipeUser($this->mysql->reveal());
     }
 
     public function testCanInstantiate()
@@ -218,5 +224,18 @@ class ModelTest extends \PHPUnit\Framework\TestCase
         $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('name must be unique for Pipe.');
         $this->pipe->insert($pipe);
+    }
+
+    public function testBelongsTo()
+    {
+        $this->mysql->where(\Prophecy\Argument::type('string'), \Prophecy\Argument::type('int'))->willReturn(true);
+        $this->mysql->where(\Prophecy\Argument::type('string'), \Prophecy\Argument::type('string'))->willReturn(true);
+        $this->mysql->join(\Prophecy\Argument::type('string'), \Prophecy\Argument::type('string'), \Prophecy\Argument::type('string'))->willReturn(true);
+        $this->mysql->get(\Prophecy\Argument::exact('pipes Pipe'))->willReturn($this->pipes);
+        $this->mysql->get(\Prophecy\Argument::exact('users User'))->willReturn($this->users);
+        $this->mysql->get(\Prophecy\Argument::exact('pipes_users PipeUser'))->willReturn($this->pipesUsers);
+
+        $pipeUsers = $this->pipeUser->getAll();
+        $this->assertEquals(1, $pipeUsers[0]['pipe_id']);
     }
 }

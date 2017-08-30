@@ -1,7 +1,7 @@
 <?php
-namespace PHPRed\Models;
+namespace Custom;
 
-class User extends Model
+class User extends \PHPRed\Models\Model
 {
     public function __construct(\MysqliDb $mysql)
     {

@@ -1,7 +1,7 @@
 <?php
-namespace PHPRed\Models;
+namespace Custom;
 
-class Pipe extends Model
+class Pipe extends \PHPRed\Models\Model
 {
     public function __construct(\MysqliDb $mysql)
     {

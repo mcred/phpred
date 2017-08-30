@@ -97,7 +97,8 @@ abstract class Model
     {
         if ($this->$method) {
             foreach ($this->$method as $attachModel) {
-                $attachModel = __NAMESPACE__ . '\\' . $attachModel;
+                $class = new \ReflectionClass($this);
+                $attachModel = $class->getNamespaceName() . '\\' . $attachModel;
                 $attach = new $attachModel($this->mysql);
                 foreach ($this->data as $key => $model) {
                     switch ($method) {
@@ -136,7 +137,8 @@ abstract class Model
     {
         if ($this->hasAndBelongsToMany) {
             foreach ($this->hasAndBelongsToMany as $habtmModel) {
-                $habtmModel = __NAMESPACE__ . '\\' . $habtmModel;
+                $class = new \ReflectionClass($this);
+                $habtmModel = $class->getNamespaceName() . '\\' . $habtmModel;
                 $habtm = new $habtmModel($this->mysql);
                 foreach ($this->data as $key => $model) {
                     $alias = $habtm->table . ' ' . $habtm->model;

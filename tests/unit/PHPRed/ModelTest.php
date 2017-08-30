@@ -57,13 +57,13 @@ class ModelTest extends \PHPUnit\Framework\TestCase
         ]];
         $this->prophet = new Prophecy\Prophet;
         $this->mysql = $this->prophet->prophesize("\MysqliDb");
-        $this->pipe = new Pipe($this->mysql->reveal());
-        $this->pipeUser = new PipeUser($this->mysql->reveal());
+        $this->pipe = new \Custom\Pipe($this->mysql->reveal());
+        $this->pipeUser = new \Custom\PipeUser($this->mysql->reveal());
     }
 
     public function testCanInstantiate()
     {
-        $this->assertInstanceOf(Pipe::class, $this->pipe);
+        $this->assertInstanceOf(\Custom\Pipe::class, $this->pipe);
     }
 
     public function testCanGetAll()

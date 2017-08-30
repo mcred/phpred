@@ -19,6 +19,11 @@
         "phpunit/phpunit": "^6.1",
         "codeclimate/php-test-reporter": "^0.4.4"
     },
+    "autoload": {
+        "psr-4": {
+            "PHPRed\\": "src/"
+        }
+    },
     "bin": [
         "phpred"
     ]

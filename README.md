@@ -23,7 +23,7 @@ composer require mcred/phpred
 
 ```php
 <?php
-class MyClass extends PHPRed\Models\Model
+class MyClass extends \PHPRed\Models\Model
 {
     public function __construct(\MysqliDb $mysql)
     {
